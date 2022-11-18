@@ -1,14 +1,22 @@
-global using FastEndpoints;
+using FastEndpoints;
 using FastEndpoints.Swagger;
 
-var builder = WebApplication.CreateBuilder();
+namespace AtomicHabits.Backend;
 
-builder.Services.AddFastEndpoints();
-builder.Services.AddSwaggerDoc();
+public static class Program
+{
+    public static void Main(string[] args)
+    {
+        var builder = WebApplication.CreateBuilder();
 
-var app = builder.Build();
+        builder.Services.AddFastEndpoints();
+        builder.Services.AddSwaggerDoc();
 
-app.UseAuthorization();
-app.UseFastEndpoints();
-app.UseSwaggerGen();
-app.Run();
+        var app = builder.Build();
+
+        app.UseAuthorization();
+        app.UseFastEndpoints();
+        app.UseSwaggerGen();
+        app.Run();
+    }    
+}
