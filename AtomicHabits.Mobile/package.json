@@ -9,15 +9,21 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@react-navigation/bottom-tabs": "^6.4.1",
+    "@react-navigation/native": "^6.0.14",
     "expo": "~47.0.6",
+    "expo-font": "~11.0.1",
     "expo-status-bar": "~1.4.2",
+    "lodash.groupby": "^4.6.0",
     "react": "18.1.0",
     "react-dom": "18.1.0",
     "react-native": "0.70.5",
+    "react-native-pager-view": "6.0.1",
     "react-native-web": "~0.18.9"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
+    "@types/lodash.groupby": "^4.6.7",
     "@types/react": "~18.0.14",
     "@types/react-native": "~0.70.6",
     "typescript": "^4.6.3"
