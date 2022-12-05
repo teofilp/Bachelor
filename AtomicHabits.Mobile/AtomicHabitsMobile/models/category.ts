@@ -1,1 +1,1 @@
-export type Category = 'Lifestyle' | 'Mindfulness' | 'Health';
+export type Category = 'Lifestyle' | 'Mindfulness' | 'Health' | 'Sports' | 'Social';

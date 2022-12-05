@@ -1,61 +1,21 @@
 import React from 'react';
 import { useLayoutEffect, useState } from "react";
 import { View, StyleSheet, ScrollView, TouchableOpacity } from "react-native"
-import { HabitListItem } from "../models/habitListItem";
-import { getColorForCategory } from "../mappers/category";
+import { HabitInfo } from "../models/habitInfo";
 import WeekBar from "../components/my-habits/WeekBar";
-import HabitsTilesList from "../components/my-habits/HabitsTilesList";
+import HabitsTilesList from "../components/shared/habit-tiles/HabitsTilesList";
 import { useNavigation } from "@react-navigation/native";
 import Colors from "../constants/color";
 import { Ionicons } from '@expo/vector-icons';
 import Text from "../components/Text";
+import Route from '../constants/route';
+import { MY_HABITS } from '../data/my-habits';
 
 const MyHabitsScreen = () => {
   const [activeDay, setActiveDay] = useState(new Date().getUTCDay());
   const navigation = useNavigation();
   const [useGrouping, setUseGrouping] = useState(false);
-  const [items] = useState<HabitListItem[]>([
-    {
-      name: 'Read at least 10 pages per day',
-      color: getColorForCategory('Lifestyle'),
-      category: 'Lifestyle'
-    },
-    {
-      name: 'Walk 10 minutes every day',
-      color: getColorForCategory('Lifestyle'),
-      category: 'Lifestyle'
-    },
-    {
-      name: 'Meditate 3 times a day',
-      color: getColorForCategory('Mindfulness'),
-      category: 'Mindfulness'
-    },
-    {
-      name: 'Work more',
-      color: getColorForCategory('Health'),
-      category: 'Health'
-    },
-    {
-      name: 'Read at least 10 pages per day',
-      color: getColorForCategory('Lifestyle'),
-      category: 'Lifestyle'
-    },
-    {
-      name: 'Walk 10 minutes every day',
-      color: getColorForCategory('Lifestyle'),
-      category: 'Lifestyle'
-    },
-    {
-      name: 'Meditate 3 times a day',
-      color: getColorForCategory('Mindfulness'),
-      category: 'Mindfulness'
-    },
-    {
-      name: 'Work more',
-      color: getColorForCategory('Health'),
-      category: 'Health'
-    },
-  ]);
+  const [items] = useState<HabitInfo[]>(MY_HABITS);
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -73,7 +33,7 @@ const MyHabitsScreen = () => {
   useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
-        <TouchableOpacity onPress={() => {}}>
+        <TouchableOpacity onPress={() => navigation.navigate(Route.CreateHabit as never)}>
           <Ionicons name='add-outline' color={Colors.DarkCornflowerBlue} size={28} />
         </TouchableOpacity>
       )
@@ -102,7 +62,7 @@ const MyHabitsScreen = () => {
   return (
     <View style={styles.root}>
       <WeekBar style={styles.weekBar} activeDay={activeDay} onDayChange={setActiveDay} />
-        {content}
+      {content}
     </View>
   )
 }
