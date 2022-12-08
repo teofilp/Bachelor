@@ -1,26 +1,30 @@
 import React from 'react';
 import { StyleSheet, TouchableOpacity, View } from "react-native";
-import { Ionicons } from '@expo/vector-icons';
 import Text from "../../Text";
+import { Icon } from '../../../models/icon';
+import CustomIcon from '../../Icon';
 
 interface ItemTileProps {
   title: string;
   backgroundColor?: string;
-  icon?: string;
+  textColor?: string;
+  icon?: Icon;
   topLabel?: string;
   showTopLabel?: boolean;
+  onPress?: () => void;
 }
 
-const ItemTile = ({ title, backgroundColor, icon, topLabel, showTopLabel }: ItemTileProps) => {
+const ItemTile = ({ title, backgroundColor, icon, topLabel, showTopLabel, textColor = "white", onPress }: ItemTileProps) => {
+  
   return (
-  <TouchableOpacity>
+  <TouchableOpacity onPress={onPress}>
     <View style={[{ backgroundColor: backgroundColor }, styles.itemContainer]}>
       <View style={[styles.topContainer, showTopLabel && { justifyContent: 'space-between' }]}>
-        {showTopLabel && <Text>{topLabel}</Text>}
-        <Ionicons name={icon as any ?? 'ios-help-outline'} size={24}/>
+        {showTopLabel && <Text style={{ color: textColor }}>{topLabel}</Text>}
+        <CustomIcon icon={icon} size={24} color={textColor} />
       </View>
       <View style={styles.titleContainer}>
-        <Text numberOfLines={2} style={styles.titleText}>{title}</Text>
+        <Text numberOfLines={2} style={[styles.titleText, { color: textColor }]}>{title}</Text>
       </View>
     </View>
   </TouchableOpacity>
@@ -52,6 +56,6 @@ const styles = StyleSheet.create({
   },
   titleText: {
     fontSize: 20,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   }
 });

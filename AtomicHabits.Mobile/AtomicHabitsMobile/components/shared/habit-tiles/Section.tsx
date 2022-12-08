@@ -4,11 +4,12 @@ import Text from "../../Text";
 
 interface SectionProps {
   title?: string;
+  style?: any;
 }
 
-const Section = ({ title = '', children }: PropsWithChildren<SectionProps>) => (
-  <View style={styles.sectionContainer} key={title}>
-    {title && <Text style={styles.sectionTitle}>{title}</Text>}
+const Section = ({ title = '', children , style}: PropsWithChildren<SectionProps>) => (
+  <View style={[styles.sectionContainer, style]} key={title}>
+    {title ? <Text style={styles.sectionTitle}>{title}</Text> : null}
     {children}
   </View>
 );

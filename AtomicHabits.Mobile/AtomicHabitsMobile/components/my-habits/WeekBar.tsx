@@ -51,23 +51,27 @@ const styles = StyleSheet.create({
     width: 42,
     height: 42,
     borderRadius: 8,
-    borderColor: Colors.DarkCornflowerBlue,
-    borderWidth: 1.25,
+    backgroundColor: 'white',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    shadowColor: '#555',
+    shadowRadius: 5,
+    shadowOpacity: .5,
+    shadowOffset: { width: 4, height: 4 }
   },
   dayText: {
-    color: Colors.DarkCornflowerBlue,
+    color: Colors.MaximumPurple,
     fontSize: 20,
   },
   activeDayItem: {
-    backgroundColor: Colors.DarkCornflowerBlue
+    backgroundColor: Colors.MaximumPurple,
   },
   activeDayText: {
     color: Colors.MintCream
   },
   today: {
-    borderWidth: 2.5
+    borderWidth: 2.5,
+    borderColor: Colors.MaximumPurple
   }
 });
 

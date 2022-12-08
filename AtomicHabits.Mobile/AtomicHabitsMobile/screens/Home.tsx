@@ -33,10 +33,10 @@ const Home = () => (
         backgroundColor: Colors.MintCream,
         shadowOpacity: 0
       },
-      headerTintColor: Colors.DarkCornflowerBlue,
+      headerTintColor: Colors.MaximumPurple,
       tabBarShowLabel: false,
-      tabBarActiveTintColor: Colors.DarkCornflowerBlue,
-      tabBarInactiveTintColor: Colors.CornflowerBlueFaded,
+      tabBarActiveTintColor: Colors.MaximumPurple,
+      tabBarInactiveTintColor: Colors.LavenderGray,
     }}
   >
     <Tabs.Screen 

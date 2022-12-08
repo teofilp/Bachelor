@@ -1,7 +1,8 @@
 const Colors = {
-  MintCream: "#F8FFF4",
-  DarkCornflowerBlue: '#1B4079',
-  CornflowerBlueFaded: '#3C5479AD'
+  MintCream: "#F7FDF3",
+  MaximumPurple: '#783F8E',
+  MaximumPurple01: '#783F8E20',
+  LavenderGray: '#C8C6D7'
 }
 
 export default Colors;

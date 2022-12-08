@@ -23,7 +23,7 @@ const MyHabitsScreen = () => {
         <TouchableOpacity onPress={() => setUseGrouping(old => !old)}>
           <Ionicons 
             name={useGrouping ? 'file-tray-stacked-outline' : 'file-tray-outline'} 
-            color={Colors.DarkCornflowerBlue} size={28} 
+            color={Colors.MaximumPurple} size={28} 
           />
         </TouchableOpacity>
       )
@@ -34,7 +34,7 @@ const MyHabitsScreen = () => {
     navigation.setOptions({
       headerRight: () => (
         <TouchableOpacity onPress={() => navigation.navigate(Route.CreateHabit as never)}>
-          <Ionicons name='add-outline' color={Colors.DarkCornflowerBlue} size={28} />
+          <Ionicons name='add-outline' color={Colors.MaximumPurple} size={28} />
         </TouchableOpacity>
       )
     })
@@ -52,7 +52,7 @@ const MyHabitsScreen = () => {
 
   const show = true;
   const content = items.length > 0 && show ? (
-    <ScrollView style={{ flex: 1 }}>
+    <ScrollView>
       <HabitsTilesList items={items} useGrouping={useGrouping} groupBy="category"/>
     </ScrollView> 
     ) : (
@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
     paddingVertical: 12,
     borderRadius: 50,
-    backgroundColor: Colors.DarkCornflowerBlue,
+    backgroundColor: Colors.MaximumPurple,
     marginTop: 24,
     flexDirection: 'row',
     alignItems: 'center',

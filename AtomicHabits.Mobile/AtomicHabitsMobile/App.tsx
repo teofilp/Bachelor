@@ -2,12 +2,11 @@ import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView, StyleSheet, View } from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import DailyHabits from './screens/DailyHabits';
 import Route from './constants/route';
 import { NavigationContainer } from '@react-navigation/native';
 import Colors from './constants/color';
 import HomeScreen from './screens/Home';
-import CreateHabitScreen from './screens/CreateHabit';
+import { CreateHabitScreen } from './screens/create-habit';
 
 const Stack = createNativeStackNavigator();
 
@@ -25,7 +24,7 @@ const App = () => {
               headerStyle: {
                 backgroundColor: Colors.MintCream,
               },
-              headerTintColor: Colors.DarkCornflowerBlue,
+              headerTintColor: Colors.MaximumPurple,
               headerShadowVisible: false,
             }}>
             <Stack.Screen 
@@ -33,13 +32,10 @@ const App = () => {
                 headerShown: false
               }} 
               name={Route.Home} component={HomeScreen} />
-            <Stack.Screen
-              options={{
-                presentation: 'modal',
-                title: 'Create Habit'
-              }}
-              name={Route.CreateHabit} 
-              component={CreateHabitScreen} />
+            <Stack.Screen options={{
+              presentation: 'modal',
+              headerShown: false
+            }} name={Route.CreateHabit} component={CreateHabitScreen}/>
           </Stack.Navigator>
         </NavigationContainer>
       </View>

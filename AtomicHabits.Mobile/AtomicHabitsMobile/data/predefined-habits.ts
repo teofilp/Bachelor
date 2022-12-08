@@ -7,63 +7,81 @@ export const PREDEFINED_HABITS: HabitInfo[] = [
     category: 'Health',
     name: 'Drink water',
     color: getColorForCategory('Health'),
-    icon: 'ios-water',
-    iconType: IconType.Ionicons
+    icon: {
+      name: 'ios-water',
+      type: IconType.Ionicons
+    }
   },
   {
     category: 'Health',
     name: 'Eat fruits',
     color: getColorForCategory('Health'),
-    icon: 'fruit-cherries',
-    iconType: IconType.MaterialComunityIcons
+    icon: {
+      name: 'fruit-cherries',
+      type: IconType.MaterialComunityIcons
+    }
   },
   {
     category: 'Health',
     name: 'Sleep early',
     color: getColorForCategory('Health'),
-    icon: 'sleep',
-    iconType: IconType.MaterialComunityIcons
+    icon: {
+      name: 'sleep',
+      type: IconType.MaterialComunityIcons
+    }
   },
   {
     category: 'Health',
     name: 'Workout',
     color: getColorForCategory('Health'),
-    icon: 'ios-barbell',
-    iconType: IconType.Ionicons
+    icon: {
+      name: 'ios-barbell',
+      type: IconType.Ionicons
+    }
   },
   {
     category: 'Lifestyle',
     name: 'Call parents',
     color: getColorForCategory('Lifestyle'),
-    icon: 'heart-sharp',
-    iconType: IconType.Ionicons
+    icon: {
+      name: 'heart-sharp',
+      type: IconType.Ionicons
+    }
   },
   {
     category: 'Lifestyle',
     name: 'Track expenses',
     color: getColorForCategory('Lifestyle'),
-    icon: 'track-changes',
-    iconType: IconType.MaterialIcons
+    icon: {
+      name: 'track-changes',
+      type: IconType.MaterialIcons
+    }
   },
   {
     category: 'Lifestyle',
     name: 'Save money',
     color: getColorForCategory('Lifestyle'),
-    icon: 'coins',
-    iconType: IconType.FontAwesome5
+    icon: {
+      name: 'coins',
+      type: IconType.FontAwesome5
+    }
   },
   {
     category: 'Mindfulness',
     name: 'Meditate',
     color: getColorForCategory('Mindfulness'),
-    icon: 'think-peaks',
-    iconType: IconType.FontAwesome5
+    icon: {
+      name: 'think-peaks',
+      type: IconType.FontAwesome5
+    }
   },
   {
     category: 'Mindfulness',
     name: 'Breathe',
     color: getColorForCategory('Mindfulness'),
-    icon: 'flower',
-    iconType: IconType.Ionicons
+    icon: {
+      name: 'flower',
+      type: IconType.Ionicons
+    }
   },
 ]

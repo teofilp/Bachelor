@@ -11,9 +11,10 @@ import Section from './Section';
 interface GroupedTilesListProps {
   items: HabitInfo[];
   groupBy: string;
+  onItemPress?: (item: HabitInfo) => void;
 }
 
-const GroupedTilesList = ({ items, groupBy }: GroupedTilesListProps) => {
+const GroupedTilesList = ({ items, groupBy, onItemPress }: GroupedTilesListProps) => {
   const sections = useMemo<HabitSection[]>(() => {
     var groupedItems = groupby(items, groupBy);
     return Object.keys(groupedItems).map<HabitSection>(key => ({
@@ -25,8 +26,8 @@ const GroupedTilesList = ({ items, groupBy }: GroupedTilesListProps) => {
   return (
     <>
       {sections.map(sec => (
-        <Section title={sec.title}>
-          <SimpleTilesList key={sec.title} useGrouping columns={sec.items} />
+        <Section key={sec.title} title={sec.title}>
+          <SimpleTilesList onItemPress={onItemPress} key={sec.title} useGrouping columns={sec.items} />
         </Section>
       ))}
     </>
