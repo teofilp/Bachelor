@@ -17,10 +17,7 @@ const PickHabitScreen = () => {
     <View style={styles.root}>
       <ScrollView>
         <HabitsTilesList
-          onItemPress={item => {
-            console.log("picked")
-            navigation.navigate(Route.HabitSetup as never, item as never)
-          }}
+          onItemPress={item => navigation.navigate(Route.HabitSetup as never, item as never)}
           items={PREDEFINED_HABITS}
           groupBy='category'
           useGrouping />

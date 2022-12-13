@@ -8,25 +8,31 @@ import CustomIcon from "../Icon";
 import Modal from "../Modal";
 
 interface IconPickerProps {
+  icon: Icon | null;
   visible: boolean;
   onIconSelected: (icon: Icon) => void;
   onDismiss: () => void;
 }
 
-const IconPicker = ({ visible, onIconSelected, onDismiss }: IconPickerProps) => {
-  const [activeIcon, setActiveIcon] = useState<Icon | null>(null);
+const IconPicker = ({ icon, visible, onIconSelected, onDismiss }: IconPickerProps) => {
+  const [activeIcon, setActiveIcon] = useState<Icon | null>(icon);
   const isIconActive = (icon: Icon) => icon.name == activeIcon?.name && 
     icon.type == activeIcon?.type
 
   useEffect(() => {
-    setActiveIcon(null);
-  }, [visible]);
+    setActiveIcon(icon ?? null);
+  }, [visible, icon]);
+
+  const handleConfirm = () => {
+    activeIcon && onIconSelected(activeIcon);
+    onDismiss();
+  }
   
   return (
     <Modal
       visible={visible}
       onDismiss={onDismiss}>
-      <View style={{ height: 350 }}>
+      <View>
         <ScrollView>
           <View style={styles.iconsList}>
             {icons.map(icon => (
@@ -47,8 +53,9 @@ const IconPicker = ({ visible, onIconSelected, onDismiss }: IconPickerProps) => 
           textStyle={{
             color: Colors.MaximumPurple
           }}
-          title="Close" />
-        <Button title="Confirm" />
+          title="Close"
+          onPress={onDismiss} />
+        <Button title="Confirm" onPress={handleConfirm}/>
       </View>
     </Modal>
   );
@@ -59,7 +66,8 @@ export default IconPicker;
 const styles = StyleSheet.create({
   actionsContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-around'
+    justifyContent: 'space-around',
+    paddingTop: 12
   },
   iconsList: {
     flexDirection: 'row',

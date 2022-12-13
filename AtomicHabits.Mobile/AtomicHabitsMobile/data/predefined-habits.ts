@@ -1,4 +1,4 @@
-import { getColorForCategory } from "../mappers/category";
+import { getRandomColorForCategory } from "../mappers/category";
 import { HabitInfo } from "../models/habitInfo";
 import { IconType } from "../models/iconType";
 
@@ -6,7 +6,7 @@ export const PREDEFINED_HABITS: HabitInfo[] = [
   {
     category: 'Health',
     name: 'Drink water',
-    color: getColorForCategory('Health'),
+    color: getRandomColorForCategory('Health'),
     icon: {
       name: 'ios-water',
       type: IconType.Ionicons
@@ -15,7 +15,7 @@ export const PREDEFINED_HABITS: HabitInfo[] = [
   {
     category: 'Health',
     name: 'Eat fruits',
-    color: getColorForCategory('Health'),
+    color: getRandomColorForCategory('Health'),
     icon: {
       name: 'fruit-cherries',
       type: IconType.MaterialComunityIcons
@@ -24,7 +24,7 @@ export const PREDEFINED_HABITS: HabitInfo[] = [
   {
     category: 'Health',
     name: 'Sleep early',
-    color: getColorForCategory('Health'),
+    color: getRandomColorForCategory('Health'),
     icon: {
       name: 'sleep',
       type: IconType.MaterialComunityIcons
@@ -33,7 +33,7 @@ export const PREDEFINED_HABITS: HabitInfo[] = [
   {
     category: 'Health',
     name: 'Workout',
-    color: getColorForCategory('Health'),
+    color: getRandomColorForCategory('Health'),
     icon: {
       name: 'ios-barbell',
       type: IconType.Ionicons
@@ -42,7 +42,7 @@ export const PREDEFINED_HABITS: HabitInfo[] = [
   {
     category: 'Lifestyle',
     name: 'Call parents',
-    color: getColorForCategory('Lifestyle'),
+    color: getRandomColorForCategory('Lifestyle'),
     icon: {
       name: 'heart-sharp',
       type: IconType.Ionicons
@@ -51,7 +51,7 @@ export const PREDEFINED_HABITS: HabitInfo[] = [
   {
     category: 'Lifestyle',
     name: 'Track expenses',
-    color: getColorForCategory('Lifestyle'),
+    color: getRandomColorForCategory('Lifestyle'),
     icon: {
       name: 'track-changes',
       type: IconType.MaterialIcons
@@ -60,7 +60,7 @@ export const PREDEFINED_HABITS: HabitInfo[] = [
   {
     category: 'Lifestyle',
     name: 'Save money',
-    color: getColorForCategory('Lifestyle'),
+    color: getRandomColorForCategory('Lifestyle'),
     icon: {
       name: 'coins',
       type: IconType.FontAwesome5
@@ -69,7 +69,7 @@ export const PREDEFINED_HABITS: HabitInfo[] = [
   {
     category: 'Mindfulness',
     name: 'Meditate',
-    color: getColorForCategory('Mindfulness'),
+    color: getRandomColorForCategory('Mindfulness'),
     icon: {
       name: 'think-peaks',
       type: IconType.FontAwesome5
@@ -78,7 +78,7 @@ export const PREDEFINED_HABITS: HabitInfo[] = [
   {
     category: 'Mindfulness',
     name: 'Breathe',
-    color: getColorForCategory('Mindfulness'),
+    color: getRandomColorForCategory('Mindfulness'),
     icon: {
       name: 'flower',
       type: IconType.Ionicons

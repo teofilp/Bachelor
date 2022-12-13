@@ -51,7 +51,8 @@ const styles = StyleSheet.create({
     padding: 32
   },
   header: {
-    flexDirection: 'row-reverse'
+    flexDirection: 'row-reverse',
+    paddingBottom: 12
   },
   dismiss: {
     flex: 1

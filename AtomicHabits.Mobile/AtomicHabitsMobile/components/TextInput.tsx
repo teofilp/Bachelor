@@ -25,16 +25,15 @@ export default TextInput;
 
 const styles = StyleSheet.create({
   inputContainer: {
-    flex: 1,
-    marginBottom: 32
+    flex: 1
   },
   input: {
-    paddingVertical: 6,
+    paddingVertical: 12,
     paddingHorizontal: 12,
     borderRadius: 4,
     backgroundColor: '#eee',
     marginTop: 4,
-    minWidth: 240,
+    minWidth: 300,
     fontSize: 16
   },
   label: {

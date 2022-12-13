@@ -4,7 +4,7 @@ import { Icon } from "../models/icon";
 import { IconType } from '../models/iconType';
 
 interface CustomIconProps {
-  icon?: Icon;
+  icon?: Icon | null;
   size?: number;
   color?: string;
 }

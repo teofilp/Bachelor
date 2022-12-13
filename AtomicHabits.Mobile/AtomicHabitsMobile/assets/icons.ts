@@ -54,9 +54,9 @@ export const icons: Icon[] = [
   { name: 'food-apple-outline', type: IconType.MaterialComunityIcons},
   { name: 'food-croissant', type: IconType.MaterialComunityIcons},
   { name: 'food-drumstick', type: IconType.MaterialComunityIcons},
-  { name: 'food', type: IconType.MaterialComunityIcons},
   { name: 'fastfood', type: IconType.MaterialIcons},
   { name: 'md-fast-food', type: IconType.Ionicons},
+  { name: 'food', type: IconType.MaterialComunityIcons},
   { name: 'happy', type: IconType.Ionicons},
   { name: 'flower', type: IconType.Ionicons},
 ]
