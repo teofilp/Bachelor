@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Pressable, ScrollView, StyleSheet, TouchableOpacity, View } from "react-native";
 import { icons } from "../../assets/icons";
 import Colors from "../../constants/color";
+import { ColorThemeContext } from '../../context/colorThemeContext';
 import { Icon } from "../../models/icon";
 import Button from "../Button";
 import CustomIcon from "../Icon";
@@ -18,6 +19,7 @@ const IconPicker = ({ icon, visible, onIconSelected, onDismiss }: IconPickerProp
   const [activeIcon, setActiveIcon] = useState<Icon | null>(icon);
   const isIconActive = (icon: Icon) => icon.name == activeIcon?.name && 
     icon.type == activeIcon?.type
+  const { color } = useContext(ColorThemeContext);
 
   useEffect(() => {
     setActiveIcon(icon ?? null);
@@ -38,7 +40,7 @@ const IconPicker = ({ icon, visible, onIconSelected, onDismiss }: IconPickerProp
             {icons.map(icon => (
               <View key={`${icon.name}.${icon.type}`} style={styles.iconContainer}>
                 <TouchableOpacity onPress={() => setActiveIcon(icon)}>
-                  <CustomIcon icon={icon} size={28} color={isIconActive(icon) ? Colors.MaximumPurple : 'black'} />
+                  <CustomIcon icon={icon} size={28} color={isIconActive(icon) ? color : 'black'} />
                 </TouchableOpacity>
               </View>
             ))}
@@ -51,11 +53,14 @@ const IconPicker = ({ icon, visible, onIconSelected, onDismiss }: IconPickerProp
             backgroundColor: Colors.MaximumPurple01
           }}
           textStyle={{
-            color: Colors.MaximumPurple
+            color: color
           }}
           title="Close"
           onPress={onDismiss} />
-        <Button title="Confirm" onPress={handleConfirm}/>
+        <Button 
+          title="Confirm" 
+          onPress={handleConfirm}
+          style={{ backgroundColor: color }} />
       </View>
     </Modal>
   );

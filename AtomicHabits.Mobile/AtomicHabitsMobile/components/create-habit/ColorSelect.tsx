@@ -1,6 +1,6 @@
-import React, { useState } from "react"
-import { View, Text, TouchableOpacity } from 'react-native';
-import { StyleSheet } from "react-native"
+import React, { useContext, useState } from "react"
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { ColorThemeContext } from "../../context/colorThemeContext";
 import ColorPicker from "./ColorPicker";
 
 interface ColorSelectProps {
@@ -12,9 +12,15 @@ interface ColorSelectProps {
 
 const ColorSelect = ({ value, onValueChanged, style, label }: ColorSelectProps) => {
   const [modalVisible, setModalVisible] = useState(false);
+  const { setColor } = useContext(ColorThemeContext);
+
+  const colorSelectedHandler = (color: string) => {
+    onValueChanged(color);
+    setColor(color);
+  }
   
   return (
-    <View style={style}>
+    <View style={[{ flex: 1 }, style]}>
       <Text style={styles.label}>{label}</Text>
       <TouchableOpacity style={styles.container} onPress={() => setModalVisible(true)}>
         <View>
@@ -25,10 +31,10 @@ const ColorSelect = ({ value, onValueChanged, style, label }: ColorSelectProps) 
         color={value}
         visible={modalVisible} 
         onDismiss={() => setModalVisible(false)}
-        onColorSelected={onValueChanged} />
+        onColorSelected={colorSelectedHandler} />
     </View>
-  )
-}
+  );
+};
 
 export default ColorSelect;
 
@@ -38,7 +44,6 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     backgroundColor: '#eee',
     marginTop: 4,
-    width: 120,
     flex: 1
   },
   colorBox: {

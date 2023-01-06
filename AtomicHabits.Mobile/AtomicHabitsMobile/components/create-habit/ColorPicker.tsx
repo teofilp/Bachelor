@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { ScrollView, StyleSheet, TouchableOpacity, View } from "react-native";
 import Colors from "../../constants/color";
+import { ColorThemeContext } from '../../context/colorThemeContext';
 import { generatedColors } from '../../utils/colors';
 import Button from "../Button";
 import Modal from "../Modal";
@@ -13,6 +14,7 @@ interface ColorPickerProps {
 }
 
 const ColorPicker = ({ color, visible, onColorSelected, onDismiss }: ColorPickerProps) => {
+  const { color: themeColor } = useContext(ColorThemeContext);
   const [activeColor, setActiveColor] = useState<string>(color);
   const isColorActive = (color: string) => color === activeColor;
   
@@ -35,7 +37,13 @@ const ColorPicker = ({ color, visible, onColorSelected, onDismiss }: ColorPicker
             {generatedColors.map(colorCategory => (
               <View key={colorCategory.join('')} style={styles.colorsContainer}>
                 {colorCategory.map(color => (
-                  <TouchableOpacity onPress={() => onColorSelected(color)} style={[styles.colorBoxContainer, isColorActive(color) && styles.colorBoxContainerActive]}>
+                  <TouchableOpacity 
+                    key={color}
+                    onPress={() => setActiveColor(color)} 
+                    style={[
+                      styles.colorBoxContainer, 
+                      isColorActive(color) && styles.colorBoxContainerActive 
+                    ]}>
                     <View style={[styles.colorBox, { backgroundColor: color }, isColorActive(color) && styles.colorBoxActive]}/>
                   </TouchableOpacity>
                 ))}
@@ -50,11 +58,14 @@ const ColorPicker = ({ color, visible, onColorSelected, onDismiss }: ColorPicker
             backgroundColor: Colors.MaximumPurple01
           }}
           textStyle={{
-            color: Colors.MaximumPurple
+            color: themeColor
           }}
           title="Close"
           onPress={onDismiss} />
-        <Button title="Confirm" onPress={handleConfirm}/>
+        <Button 
+          title="Confirm" 
+          onPress={handleConfirm} 
+          style={{ backgroundColor: themeColor }} />
       </View>
     </Modal>
   );

@@ -1,19 +1,35 @@
-import React, { useMemo } from "react";
+import React, { useContext, useMemo } from "react";
 import { StyleSheet, TouchableOpacity, View } from "react-native"
-import Colors from "../../constants/color";
-import { HabitFrequency } from "../../models/habitFrequency";
-import Text from "../Text";
+import { HabitFrequency } from "../../../models/habitFrequency";
+import Text from "../../Text";
+import DaySelector from "./DaysSelector";
+import { getWeekDays } from "../../../utils/weekDays";
+import { ColorThemeContext } from "../../../context/colorThemeContext";
 
 const getSpecificFrequencySelector = (activeFrequency: HabitFrequency) => {
   const mapper = {
     [HabitFrequency.Daily]: () => <View/>,
-    [HabitFrequency.Weekly]: () => <Text>Weekly</Text>,
-    [HabitFrequency.Monthly]: () => <Text>Monthly</Text>
+    [HabitFrequency.Weekly]: () => (
+      <DaySelector 
+        name='weekDays' 
+        items={getWeekDays()} 
+        itemFormatter={item => item[0]} />
+    ),
+    [HabitFrequency.Monthly]: () => (
+      <DaySelector 
+        name='monthDays'
+        fillEmptyItemsCount={4}
+        listContainerStyle={{
+          flexWrap: 'wrap'
+        }}
+        itemStyle={{ margin: 4}}
+        items={Array.from(new Array(31).keys()).map(x => x + 1)} 
+        itemFormatter={item => item < 10 ? `0${item}` : item} />
+    )
   };
 
   return mapper[activeFrequency];
 };
-
 
 interface HabitFrequencyProps {
   value: HabitFrequency;
@@ -22,11 +38,15 @@ interface HabitFrequencyProps {
 }
 
 const HabitFrequencyComponent = ({ value, label, onValueChanged } : HabitFrequencyProps) => {
+  const { color } = useContext(ColorThemeContext);
+  
   const getfontWeightStyle = (freq: HabitFrequency) => {
     if (freq == value) return 'bold';
   }
-  const getContainerStyle = (freq: HabitFrequency) => freq == value && styles.activeOptionContainer;
+  const getContainerStyle = (freq: HabitFrequency) => freq == value && { backgroundColor: color };
+
   const getTextStyle = (freq: HabitFrequency) => freq == value && styles.activeText;
+
   const Selector = useMemo(() => getSpecificFrequencySelector(value), [value]);
 
   return (
@@ -61,7 +81,9 @@ const HabitFrequencyComponent = ({ value, label, onValueChanged } : HabitFrequen
           </Text>
         </TouchableOpacity>
       </View>
-      <Selector/>
+      <View style={{ marginTop: 12 }}>
+        <Selector/>
+      </View>
     </View>
   )
 }
@@ -77,15 +99,12 @@ const styles = StyleSheet.create({
   },
   optionContainer: {
     flex: 1,
-    paddingVertical: 16,
+    paddingVertical: 12,
     borderRadius: 4,
     backgroundColor: '#eee',
     marginTop: 4,
     justifyContent: 'center',
     alignItems: 'center'
-  },
-  activeOptionContainer: {
-    backgroundColor: Colors.MaximumPurple,
   },
   activeText: {
     color: 'white',
