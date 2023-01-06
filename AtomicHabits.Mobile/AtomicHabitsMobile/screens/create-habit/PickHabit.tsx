@@ -31,6 +31,7 @@ const PickHabitScreen = () => {
                   name: 'ios-add-outline',
                   type: IconType.Ionicons
                 }}
+                onPress={() => navigation.navigate(Route.HabitSetup as never)}
                 backgroundColor={Colors.MaximumPurple} />
             </Column>
             <Column />

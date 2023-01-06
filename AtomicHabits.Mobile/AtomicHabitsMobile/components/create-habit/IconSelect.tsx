@@ -7,26 +7,27 @@ import CustomIcon from "../Icon";
 import IconPicker from "./IconPicker"
 
 interface IconSelectProps {
-  icon: Icon | null;
-  onIconChanged: (icon: Icon) => void;
+  label: string;
+  value: Icon | null;
+  onValueChanged: (icon: Icon) => void;
 }
 
-const IconSelect = ({ icon, onIconChanged }: IconSelectProps) => {
+const IconSelect = ({ value, onValueChanged, label }: IconSelectProps) => {
   const [modalVisible, setModalVisible] = useState(false);
   
   return (
     <View>
-      <Text style={styles.label}>Icon</Text>
+      <Text style={styles.label}>{label}</Text>
       <TouchableOpacity style={styles.container} onPress={() => setModalVisible(true)}>
         <View>
-          <CustomIcon icon={icon} color={Colors.MaximumPurple} size={24} />
+          <CustomIcon icon={value} color={Colors.MaximumPurple} size={24} />
         </View>
       </TouchableOpacity>
       <IconPicker 
-        icon={icon}
+        icon={value}
         visible={modalVisible} 
         onDismiss={() => setModalVisible(false)}
-        onIconSelected={onIconChanged} />
+        onIconSelected={onValueChanged} />
     </View>
   )
 }

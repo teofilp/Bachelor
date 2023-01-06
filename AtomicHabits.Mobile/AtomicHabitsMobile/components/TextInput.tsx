@@ -2,11 +2,12 @@ import React from 'react';
 import { View, TextInput as RnTextInput, TextInputProps as RnTextInputProps, StyleSheet} from "react-native"
 import Text from "./Text"
 
-interface TextInputProps extends RnTextInputProps {
+interface TextInputProps extends Omit<RnTextInputProps, "onChangeText"> {
   label: string;
+  onValueChanged: (val: string) => void;
 }
 
-const TextInput = ({ label, style, ...rest }: TextInputProps) => {
+const TextInput = ({ label, style, onValueChanged, ...rest }: TextInputProps) => {
   return (
     <View style={styles.inputContainer}>
       <View style={styles.row}>
@@ -15,7 +16,7 @@ const TextInput = ({ label, style, ...rest }: TextInputProps) => {
         </Text>
       </View>
       <View style={styles.row}>
-        <RnTextInput {...rest} style={[styles.input, style]} />
+        <RnTextInput onChangeText={onValueChanged} {...rest} style={[styles.input, style]} />
       </View>
     </View>
   )

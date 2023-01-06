@@ -1,33 +1,44 @@
 import { useNavigation } from '@react-navigation/native';
-import React, { PropsWithChildren, useEffect, useState } from 'react';
+import React, { PropsWithChildren, useEffect } from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
 import ColorSelect from '../../components/create-habit/ColorSelect';
 import IconSelect from '../../components/create-habit/IconSelect';
 import TextInput from '../../components/TextInput';
 import Colors from '../../constants/color';
-import { Icon } from '../../models/icon';
+import Field from '../../components/form/Field';
+import { useForm } from 'react-hook-form';
+import HabitFrequency from '../../components/create-habit/HabitFrequency';
 
 const Section = ({ children }: PropsWithChildren<any>) => <View style={styles.section}>{children}</View>
 
 const HabitSetup = () => {
   const navigation = useNavigation();
-  const [icon, setIcon] = useState<Icon | null>(null);
-  const [color, setColor] = useState<string>(Colors.MaximumPurple);
-
-  useEffect(() => {
-    // setTimeout(() => navigation.navigate(Route.Home as never), 1500)
-  }, []);
+  const formMethods = useForm({
+    defaultValues: {
+      name: '',
+      description: '',
+      icon: null,
+      color: Colors.MaximumPurple
+    }
+  });
 
   return (
     <View style={styles.root}>
       <ScrollView style={{ flex: 1 }}>
         <Section>
-          <TextInput
+          <Field 
+            control={formMethods.control}
+            name="name"
+            component={TextInput}
+            placeholder="e.g. Custom habit" 
             label="Name"
-            placeholder="e.g. Custom habit" />
+          />
         </Section>
         <Section>
-          <TextInput
+          <Field
+            control={formMethods.control}
+            component={TextInput}
+            name="description"
             label="Description"
             placeholder="e.g. A short description"
             textAlignVertical="top"
@@ -40,8 +51,27 @@ const HabitSetup = () => {
         </Section>
         <Section>
           <View style={{ flexDirection: 'row' }}>
-            <IconSelect icon={icon} onIconChanged={setIcon} />
-            <ColorSelect style={{ marginLeft: 16 }} color={color} onColorChanged={setColor} />
+            <Field 
+              control={formMethods.control} 
+              component={IconSelect} 
+              name="icon"
+              label="Icon" />
+            <Field 
+              control={formMethods.control}
+              component={ColorSelect}
+              name="color"
+              label="Color" 
+              style={{ marginLeft: 16 }} />
+          </View>
+        </Section>
+        <Section>
+          <View style={{ flexDirection: 'row'}}>
+            <Field 
+              control={formMethods.control}
+              name="frequency"
+              label="Frequency"
+              component={HabitFrequency}
+            />
           </View>
         </Section>
       </ScrollView>

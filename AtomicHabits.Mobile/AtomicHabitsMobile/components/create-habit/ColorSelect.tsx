@@ -4,27 +4,28 @@ import { StyleSheet } from "react-native"
 import ColorPicker from "./ColorPicker";
 
 interface ColorSelectProps {
-  color: string;
-  onColorChanged: (color: string) => void;
+  label: string;
+  value: string;
+  onValueChanged: (color: string) => void;
   style?: any;
 }
 
-const ColorSelect = ({ color, onColorChanged, style }: ColorSelectProps) => {
+const ColorSelect = ({ value, onValueChanged, style, label }: ColorSelectProps) => {
   const [modalVisible, setModalVisible] = useState(false);
   
   return (
     <View style={style}>
-      <Text style={styles.label}>Color</Text>
+      <Text style={styles.label}>{label}</Text>
       <TouchableOpacity style={styles.container} onPress={() => setModalVisible(true)}>
         <View>
-          <View style={[styles.colorBox, !!color && { backgroundColor: color }]}/>            
+          <View style={[styles.colorBox, !!value && { backgroundColor: value }]}/>            
         </View>
       </TouchableOpacity>
       <ColorPicker 
-        color={color}
+        color={value}
         visible={modalVisible} 
         onDismiss={() => setModalVisible(false)}
-        onColorSelected={onColorChanged} />
+        onColorSelected={onValueChanged} />
     </View>
   )
 }
