@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, useEffect, } from 'react';
+import React, { PropsWithChildren, useContext, useEffect, } from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
 import ColorSelect from '../../components/create-habit/ColorSelect';
 import IconSelect from '../../components/create-habit/IconSelect';
@@ -8,35 +8,52 @@ import Field from '../../components/form/Field';
 import { useForm, FormProvider } from 'react-hook-form';
 import HabitFrequencyComponent from '../../components/create-habit/habit-frequency';
 import { HabitFrequency } from '../../models/habitFrequency';
-import ColorThemeContextProvider from '../../context/colorThemeContext';
+import ColorThemeContextProvider, { ColorThemeContext } from '../../context/colorThemeContext';
 import { useColorThemeHeader } from '../../hooks/useColorThemeHeader';
+import { RouteProp, useRoute } from '@react-navigation/native';
+import { ParamsList } from '../../types/routeParams';
+import HabitTriggerComponent from '../../components/create-habit/habit-trigger-type-select';
+import HabitTriggerSection from '../../components/create-habit/sections/HabitTrigger';
+import { HabitTrigger } from '../../models/habitTrigger';
 
-const Section = ({ children }: PropsWithChildren<any>) => <View style={styles.section}>{children}</View>
+export const Section = ({ children }: PropsWithChildren<any>) => <View style={styles.section}>{children}</View>
+
+const defaultHabit = {
+  name: '',
+  description: '',
+  icon: null as any,
+  color: Colors.MaximumPurple,
+  frequency: {
+    type: HabitFrequency.Daily,
+    weekDays: [],
+    monthDays: []
+  },
+  trigger: HabitTrigger.Reminder,
+  triggerSource: null
+};
 
 const HabitSetupContent = () => {
+  const route = useRoute<RouteProp<ParamsList, "HabitSetup">>();
+  const { setColor } = useContext(ColorThemeContext);
+  const defaultValues = route.params ? {
+    ...defaultHabit,
+    ...route.params
+  } : defaultHabit;
+
   const formMethods = useForm({
-    defaultValues: {
-      name: '',
-      description: '',
-      icon: null,
-      color: Colors.MaximumPurple,
-      frequency: {
-        type: HabitFrequency.Daily,
-        weekDays: [],
-        monthDays: []
-      }
-    }
+    defaultValues
   });
   useColorThemeHeader();
 
   useEffect(() => {
-    formMethods.setValue('frequency.monthDays', []);
-    formMethods.setValue('frequency.weekDays', []);
-  }, [formMethods.watch('frequency.type')]);
+    if (!route.params) return;
+
+    setColor(route.params.color!);
+  }, [route.params]);
 
   return (
     <View style={styles.root}>
-      <ScrollView style={{ flex: 1 }}>
+      <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false}>
         <FormProvider {...formMethods}>
           <Section>
             <Field 
@@ -81,16 +98,7 @@ const HabitSetupContent = () => {
               <View style={{flex: 1}} />
             </View>
           </Section>
-          <Section>
-            <View style={{ flexDirection: 'row'}}>
-              <Field 
-                control={formMethods.control}
-                name="frequency.type"
-                label="Frequency"
-                component={HabitFrequencyComponent}
-              />
-            </View>
-          </Section>
+          <HabitTriggerSection />
         </FormProvider>
       </ScrollView>
     </View>

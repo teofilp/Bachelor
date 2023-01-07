@@ -1,8 +1,8 @@
 import { Category } from "./category";
 import { Icon } from "./icon";
-import { IconType } from "./iconType";
 
 export interface HabitInfo {
+  id: number;
   name: string;
   color?: string;
   icon?: Icon;

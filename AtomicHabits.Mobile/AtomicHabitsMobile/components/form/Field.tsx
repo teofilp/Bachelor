@@ -10,7 +10,7 @@ interface FieldProps {
     onValueChanged: (val: any) => void;
     label: string;
   }>
-  defaultValue?: string;
+  defaultValue?: any;
   onChange?: (val: any) => void;
   [key: string]: any;
 }
