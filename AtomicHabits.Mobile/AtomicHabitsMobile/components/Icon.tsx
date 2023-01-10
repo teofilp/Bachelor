@@ -3,7 +3,7 @@ import { getIcon } from "../mappers/icon";
 import { Icon } from "../models/icon";
 import { IconType } from '../models/iconType';
 
-interface CustomIconProps {
+export interface CustomIconProps {
   icon?: Icon | null;
   size?: number;
   color?: string;

@@ -1,15 +1,17 @@
-import React, { FunctionComponent } from "react";
+import React, { ForwardRefExoticComponent, FunctionComponent } from "react";
 import { useController } from "react-hook-form";
+
+interface ComponentProps {
+  value: any;
+  onValueChanged: (val: any) => void;
+  label: string;
+}
 
 interface FieldProps {
   name: string;
   control: any;
   label: string;
-  component: FunctionComponent<{
-    value: any;
-    onValueChanged: (val: any) => void;
-    label: string;
-  }>
+  component: FunctionComponent<ComponentProps> | ForwardRefExoticComponent<any>
   defaultValue?: any;
   onChange?: (val: any) => void;
   [key: string]: any;

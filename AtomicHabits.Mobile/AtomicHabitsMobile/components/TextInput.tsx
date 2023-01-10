@@ -1,26 +1,33 @@
-import React from 'react';
-import { View, TextInput as RnTextInput, TextInputProps as RnTextInputProps, StyleSheet} from "react-native"
+import React, { forwardRef } from 'react';
+import { View, TextInput as RnTextInput, TextInputProps as RnTextInputProps, StyleSheet } from "react-native"
 import Text from "./Text"
 
 interface TextInputProps extends Omit<RnTextInputProps, "onChangeText"> {
-  label: string;
+  label?: string;
   onValueChanged: (val: string) => void;
+  minWidth?: number;
+  inputStyle?: any;
 }
 
-const TextInput = ({ label, style, onValueChanged, ...rest }: TextInputProps) => {
-  return (
-    <View style={styles.inputContainer}>
+const TextInput = forwardRef<RnTextInput, TextInputProps>(({ label, style, onValueChanged, value, minWidth = 0, inputStyle, ...rest }: TextInputProps, ref) => (
+  <View style={[styles.inputContainer, style]}>
+    {label && (
       <View style={styles.row}>
         <Text style={styles.label}>
           {label}
         </Text>
       </View>
-      <View style={styles.row}>
-        <RnTextInput onChangeText={onValueChanged} {...rest} style={[styles.input, style]} />
-      </View>
+    )}
+    <View style={styles.row}>
+      <RnTextInput
+        {...rest}
+        ref={ref as any}
+        defaultValue={value}
+        onBlur={({ nativeEvent }) => onValueChanged(nativeEvent.text)}
+        style={[styles.input, { minWidth }, inputStyle]} />
     </View>
-  )
-}
+  </View>
+));
 
 export default TextInput;
 
@@ -33,8 +40,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     borderRadius: 4,
     backgroundColor: '#eee',
-    marginTop: 4,
-    minWidth: 300,
     fontSize: 16
   },
   label: {

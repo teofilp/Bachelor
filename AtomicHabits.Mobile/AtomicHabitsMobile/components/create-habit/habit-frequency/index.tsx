@@ -21,7 +21,7 @@ const getSpecificFrequencySelector = (activeFrequency: HabitFrequency) => {
         listContainerStyle={{
           flexWrap: 'wrap'
         }}
-        itemStyle={{ margin: 4}}
+        itemStyle={{ margin: 4 }}
         items={Array.from(new Array(31).keys()).map(x => x + 1)} 
         itemFormatter={item => item < 10 ? `0${item}` : item} />
     )

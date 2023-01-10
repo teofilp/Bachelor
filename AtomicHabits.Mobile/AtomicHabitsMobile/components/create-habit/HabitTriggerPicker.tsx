@@ -1,5 +1,5 @@
-import React, { useContext, useState } from 'react';
-import { FlatList, StyleSheet, View } from 'react-native';
+import React, { useContext, useEffect, useState } from 'react';
+import { FlatList, StyleSheet, TouchableOpacity, View } from 'react-native';
 import Colors from '../../constants/color';
 import { ColorThemeContext } from '../../context/colorThemeContext';
 import { MY_HABITS } from '../../data/my-habits';
@@ -20,24 +20,24 @@ interface HabitTriggerPickerProps {
 const HabitTriggerPicker = ({ habit, onDismiss, onHabitSelected, visible, items = MY_HABITS }: HabitTriggerPickerProps) => {
   const { color } = useContext(ColorThemeContext);
   const [activeHabit, setActiveHabit] = useState(habit);
-
+  
   const handleConfirm = () => {
     onHabitSelected(activeHabit);
     onDismiss();
   };
-
+  
   const renderItem = (item: HabitInfo) => {
     const isChecked = activeHabit == item;
 
     return (
-      <View style={styles.itemContainer}>
+      <TouchableOpacity style={styles.itemContainer} onPress={() => setActiveHabit(item)}>
         <View style={styles.nameContainer}>
           <Text style={styles.name}>{item.name}</Text>
         </View>
-        <Radio color={color} checked={isChecked} onPress={() => setActiveHabit(item)}/>
-      </View>
-    )
-  }
+        <Radio color={color} checked={isChecked}/>
+      </TouchableOpacity>
+    );
+  };
 
   return (
     <Modal visible={visible} onDismiss={onDismiss}>
@@ -64,7 +64,7 @@ const HabitTriggerPicker = ({ habit, onDismiss, onHabitSelected, visible, items 
           style={{ backgroundColor: color }} />
       </View>
     </Modal>
-  )
+  );
 };
 
 export default HabitTriggerPicker;
